@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Dojo</title>
+        <!-- index css -->
+        <link rel="stylesheet" href="asset/css/index.css">
+        
+        <!-- Dijit theme -->
+        <link rel="stylesheet" href="/js/library/dijit/themes/claro/claro.css">
+
+        <!-- Dojo Config & Register Custom Module -->
+        <script>dojoConfig = {}</script>
+        <!-- <script src='/js/library/dojo/dojo.js'></script> -->
+        <script type="text/javascript">
+            var locationPath = location.pathname.replace(/\/[^\/]+$/, "");
+            window.dojoConfig = {
+            parseOnLoad: true,
+            async: true,
+            packages: [
+                {
+                    name: "utils",
+                    location: locationPath + "/js/my/widget/utils/"
+                },
+                {
+                    name: "menu",
+                    location: locationPath + "/js/my/widget/menu/"
+                },
+                {
+                    name: "layer",
+                    location: locationPath + "/js/my/widget/layer/"
+                },
+                {
+                    name: "bufferRadius",
+                    location: locationPath + "/js/my/widget/bufferRadius/"
+                },
+                {
+                    name: "dojo",
+                    location: "/js/library/dojo"
+                },
+                {
+                    name: "dijit",
+                    location: "/js/library/dijit"
+                },        
+            ]
+            };
+        </script>
+
+        <!-- Esri Global Config Portal URL  -->
+        <script>
+            var esriConfig = {
+              portalUrl: "https://dev.gisportal.id/portal"
+            };
+        </script>
+
+        <!-- esri library -->
+        <link rel="stylesheet" href="/js/library/arcgis_js_api/javascript/4.30/esri/themes/light/main.css">
+        <script src="/js/library/arcgis_js_api/javascript/4.30/init.js"></script>
+        
+        <!-- Load Main Module -->
+        <script src="/js/boot.js"></script>
+        
+</head>
+<body class="claro">
+  <div class="container" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline', gutters:false" style="width:100%; height:100%;">
+    <div id="menus" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top'">
+    </div>
+    <div id="layerListPane" data-dojo-type="dijit/layout/TabContainer" data-dojo-props="region:'left'">
+      <div data-dojo-type="dijit/layout/ContentPane" title="Layer List" id="listLay"></div>
+      <div data-dojo-type="dijit/layout/ContentPane" title="Buffer Radius" id="buffer_radius">
+        <div class="details">Pick a tool and draw on the map. The drawn graphic will be buffered based on the specified parameters.</div>
+        <button type="button" class="tool" id="point">Point</button>
+        <button type="button" class="tool" id="line">Line</button>
+        <button type="button" class="tool" id="polygon">Polygon</button>
+        <br/><hr />
+        <div><b>Buffer Parameters</b></div>
+        Distance: <input type="text" id="distance" size="5" value="25" />
+        <select id="unit" style="width:100px;">
+          <option value="UNIT_STATUTE_MILE">Miles</option>
+          <option value="UNIT_FOOT">Feet</option>
+          <option value="UNIT_KILOMETER">Kilometers</option>
+          <option value="UNIT_METER">Meters</option>
+          <option value="UNIT_NAUTICAL_MILE">Nautical Miles</option>
+          <option value="UNIT_US_NAUTICAL_MILE">US Nautical Miles</option>
+          <option value="UNIT_DEGREE">Degrees</option>
+        </select><br />
+        <button type="button" id="clearGraphics">Clear Graphics</button>
+      </div>
+    </div>
+    <div id="map" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'">
+      <!-- <div id="search">Search</div> -->
+      <div id="HomeButton"></div>
+    </div>
+    <!-- <div id="legendDiv" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'left'"></div> -->
+  </div>
+</body>
+</html>
